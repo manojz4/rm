@@ -30,7 +30,7 @@ FOUR (testfacl)
 for view slurm acc(testfacl)
 -sacctmgr show association
 ---------
-create user
+create user(on all nodes)
 -groupadd -g 2001 rma
 -useradd -u 3001 -g 2001  -m -d /nfs/hpcsa1 -s /bin/bash hpcsa1
 
