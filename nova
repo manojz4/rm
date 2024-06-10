@@ -22,6 +22,27 @@ restart all nodes
 -scontrol show partition=nova
 --
 TWO (reserve_lab for nova)
+(Do if not done freshly)
+create user
+- groupadd -g 2001 rma
+- useradd -u 2002 -g 2001 -m -d /nfs/hpcsa1 -s /bin/bash hpcsa1
+
+create account in slurm
+-sacctmgr add account rmalab-acc
+
+assign user to account
+-sacctmgr create user name=name=hpcsa1 DefaultAccount=rmalab-acc
+
+-scontrol create reservation=reserve_lab partition=nova nodes=all duration=60 user=-root starttime=now
+--
+output
+-
+-
+-
+---
+THIRD(quantum)
+
+
 
 
 
