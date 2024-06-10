@@ -3,7 +3,7 @@ Do this in slurm.conf
 -AccountingStorageType=accounting_storage/slurmdbd
 Do systemctl to all nodes
 __________________
-ONE
+ONE(scaven)
 slurm partition
 open slurm.conf
 PartitionName=scavenger Nodes=compute-1 Default=YES MaxTime=31-00:00:00 DefaultTime=01:00:00 State=UP DisableRootJobs=YES
@@ -12,7 +12,7 @@ restart all nodes
 -scontrol show partition=scavenger
 -sinfo
 
-TWO
+TWO(create reserve_lab)
 first view reservation
 -scontrol show reservation
 create reservation
@@ -21,17 +21,56 @@ create reservation
 After work is done 
 -scontrol delete reservation=reserve_lab
 
-THREE
-report basic node
+THREE(report basic node)
 -scontrol show partition (specify individual partition ie.scaven)
 -scontrol show nodes (like compute-1)
 
-FOUR
+FOUR (testfacl)
+**(no change in slurm.conf)**
 for view slurm acc(testfacl)
--sacctmgr show assoc
-If this error comes
-(You are not running a supported accounting_storage plugin
-Only 'accounting_storage/slurmdbd' is supported.)
+-sacctmgr show association
+---------
+create user
+-groupadd -g 2001 rma
+-useradd -u 3001 -g 2001  -m -d /nfs/hpcsa1 -s /bin/bash hpcsa1
+
+create account in slurm
+-sacctmgr add account testfac1-acc
+
+assign created user to account
+-sacctmgr create user name=hpcsa1 DefaultAccount=testfac1-acc
+------
+create job.sh in root
+su hpcsa
+cd /nfs/
+nano job.sh
+---
+#! /bin/bash
+#SBATCH -N 1
+#SBATCH --ntasks-per-node=1
+#SBATCH --time=00:05:00
+#SBATCH --error=job.%J.err
+#SBATCH --output=job.%J.out
+#SBATCH -p scavenger
+cd $SLURM_SUBMIT_DIR
+echo "Starting at `date`"
+echo "running oh hosts:$SLURM_NODELIST"
+echo "hello"
+sleep 30
+
+---
+-sbatch -A testfac1-acc /nfs/job.sh
+-squeue
+---
+
+
+
+
+
+
+
+
+
 
 
 
