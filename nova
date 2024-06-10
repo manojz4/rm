@@ -46,6 +46,22 @@ output
 ---
 THIRD(quantum)
 
+---
+FOUR(qos)
+-slurm.conf (add)
+-AccountingStorageEnforce=associations,limits,qos
+do it in all nodes
+-systemctl restart all nodes
+
+-sacctmgr create qos zebra
+-sacctmgr show qos
+-sacctmgr modify qos where qos=zebra set MaxTRES=node=1
+-sacctmgr modify user name=hpcsa1 set qos=zebra
+
+
+
+
+
 
 
 
