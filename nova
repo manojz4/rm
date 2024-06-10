@@ -1,6 +1,20 @@
 First do in slurm.conf
-
-
-ONE
+-AccountingStorageEnforce=limits,associations
+-AccountingStorageType=accounting_storage/slurmdbd
+Do systemctl to all nodes
+--
+ONE(nova)
+groupadd -g 2003 rma
 open slurm.conf
+-PartitionName=nova Nodes=ALL Default=YES MaxTime=25-00:00:00 DefaultTime=30:00:00 State=UP AllowGroups=rma AllowAccounts=rmalab-acc
+
+restart all nodes
+-sinfo
+-scontrol show partition=nova
+--
+TWO (reserve_lab for nova)
+
+
+
+
 
