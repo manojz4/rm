@@ -1,3 +1,8 @@
+Do this in slurm.conf
+-AccountingStorageEnforce=limits,associations
+-AccountingStorageType=accounting_storage/slurmdbd
+Do systemctl to all nodes
+__________________
 ONE
 slurm partition
 open slurm.conf
@@ -13,6 +18,8 @@ first view reservation
 create reservation
 -scontrol create reservation=reserve_lab partition=scavenger nodes=all duration=00:60:00 user=-root starttime=now
 -scontrol show reservation (detailed output)
+After work is done 
+-scontrol delete reservation=reserve_lab
 
 THREE
 report basic node
@@ -20,7 +27,11 @@ report basic node
 -scontrol show nodes (like compute-1)
 
 FOUR
-
+for view slurm acc(testfacl)
+-sacctmgr show assoc
+If this error comes
+(You are not running a supported accounting_storage plugin
+Only 'accounting_storage/slurmdbd' is supported.)
 
 
 
