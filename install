@@ -1,1 +1,20 @@
 Scratch install
+sudo su
+nano /etc/hosts
+replace ip of your vms
+--
+go to slurm master
+nano /etc/exports
+change ip of compute (1,2)
+
+run cmd
+exportfs -arv 
+--
+go to compute 1,2
+nano /etc/fstab
+put ip of slurm master
+
+mount 192.168.144.154:/nfs /nfs(replace ip with master)
+
+to check
+df -TH
