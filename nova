@@ -4,7 +4,17 @@ First do in slurm.conf
 Do systemctl to all nodes
 --
 ONE(nova)
-groupadd -g 2003 rma
+TWO (reserve_lab for nova)
+create user
+- groupadd -g 2001 rma
+- useradd -u 2002 -g 2001 -m -d /nfs/hpcsa1 -s /bin/bash hpcsa1
+
+create account in slurm
+-sacctmgr add account rmalab-acc
+
+assign user to account
+-sacctmgr create user name=name=hpcsa1 DefaultAccount=rmalab-acc
+
 open slurm.conf
 -PartitionName=nova Nodes=ALL Default=YES MaxTime=25-00:00:00 DefaultTime=30:00:00 State=UP AllowGroups=rma AllowAccounts=rmalab-acc
 
@@ -12,7 +22,10 @@ restart all nodes
 -sinfo
 -scontrol show partition=nova
 --
-TWO (reserve_lab for nova)
+TWO
+
+
+
 
 
 
