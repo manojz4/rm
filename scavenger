@@ -1,0 +1,26 @@
+ONE
+slurm partition
+open slurm.conf
+PartitionName=scavenger Nodes=compute-1 Default=YES MaxTime=31-00:00:00 DefaultTime=01:00:00 State=UP DisableRootJobs=YES
+restart all nodes
+-scontrol show partition
+-scontrol show partition=scavenger
+-sinfo
+
+TWO
+first view reservation
+-scontrol show reservation
+create reservation
+-scontrol create reservation=reserve_lab partition=scavenger nodes=all duration=00:60:00 user=-root starttime=now
+-scontrol show reservation (detailed output)
+
+THREE
+report basic node
+-scontrol show partition (specify individual partition ie.scaven)
+-scontrol show nodes (like compute-1)
+
+FOUR
+
+
+
+
