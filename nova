@@ -4,7 +4,7 @@ First do in slurm.conf
 Do systemctl to all nodes
 --
 ONE(nova)
-create user
+create user(on all nodes)
 - groupadd -g 2001 rma
 - useradd -u 2002 -g 2001 -m -d /nfs/hpcsa1 -s /bin/bash hpcsa1
 
@@ -23,7 +23,7 @@ restart all nodes
 --
 TWO (reserve_lab for nova)
 (Do if not done freshly)
-create user
+create user(on all nodes)
 - groupadd -g 2001 rma
 - useradd -u 2002 -g 2001 -m -d /nfs/hpcsa1 -s /bin/bash hpcsa1
 
@@ -31,9 +31,13 @@ create account in slurm
 -sacctmgr add account rmalab-acc
 
 assign user to account
--sacctmgr create user name=name=hpcsa1 DefaultAccount=rmalab-acc
+-sacctmgr create user name=hpcsa1 DefaultAccount=rmalab-acc
 
 -scontrol create reservation=reserve_lab partition=nova nodes=all duration=60 user=-root starttime=now
+take output
+-
+-su hpcsa1
+
 --
 output
 -
@@ -41,6 +45,7 @@ output
 -
 ---
 THIRD(quantum)
+
 
 
 
