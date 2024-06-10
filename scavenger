@@ -70,6 +70,10 @@ For output
  (specific)
 -sacctmgr show asso Account=testfac1-acc  
 
+Do this asap
+ sacctmgr remove user name=hpcsa1
+ sacctmgr remove  Account name=testfac1-acc
+
 
 
 
