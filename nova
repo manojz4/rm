@@ -2,6 +2,9 @@ First do in slurm.conf
 -AccountingStorageEnforce=limits,associations
 -AccountingStorageType=accounting_storage/slurmdbd
 Do systemctl to all nodes
+
+*for idling the node
+scontrol update nodename=compute-2 state=idle
 --
 ONE(nova)
 create user(on all nodes)
