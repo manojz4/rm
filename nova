@@ -83,6 +83,8 @@ do it in all nodes
 -do sbatch
  -in job.sh add capital N as 1 it will run program.if N added 2 it will not run
 
+-squeue
+
 
 rememb
 /opt/slurm-21.08.8/etc# scp /opt/slurm-21.08.8/etc/slurm.conf compute-1:/opt/slurm-21.08.8/etc/
