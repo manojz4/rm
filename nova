@@ -80,6 +80,8 @@ do it in all nodes
 -sacctmgr show qos
 -sacctmgr modify qos where qos=zebra set MaxTRES=node=1
 -sacctmgr modify user name=hpcsa1 set qos=zebra
+-do sbatch
+ -in job.sh add capital N as 1 it will run program.if N added 2 it will not run
 
 
 rememb
