@@ -82,6 +82,14 @@ do it in all nodes
 -sacctmgr modify user name=hpcsa1 set qos=zebra
 
 
+rememb
+/opt/slurm-21.08.8/etc# scp /opt/slurm-21.08.8/etc/slurm.conf compute-1:/opt/slurm-21.08.8/etc/
+
+
+
+
+
+
 
 
 
