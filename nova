@@ -8,6 +8,10 @@ scontrol update nodename=compute-2 state=idle
 
 *for downing the node
 scontrol update nodename=compute-1 state=down reason="maintenance"
+
+*delete a reservation
+-scontrol delete reservation=(reserv name)  or next line
+-scontrol delete reservation=reserve_lab
 --
 ONE(nova)
 create user(on all nodes)
@@ -39,19 +43,32 @@ create account in slurm
 assign user to account
 -sacctmgr create user name=hpcsa1 DefaultAccount=rmalab-acc
 
--scontrol create reservation=reserve_lab partition=nova nodes=all duration=60 user=-root starttime=now
+-scontrol create reservation=rmalab partition=nova nodes=all duration=60 user=-root starttime=now
 take output
 -
 -su hpcsa1
 
 --
 output
--
--
--
+-sinfo
+-squeue
 ---
 THIRD(quantum)
+-sacctmgr delete user name=hpcsa1 DefaultAccount=rmalab-acc
+-scontrol delete reservation=rmalab
+-sacctmgr add account quantum-acc
+-sacctmgr create user name=hpcsa1 DefaultAccount=quantum-acc 
+-sacctmgr update user name=hpcsa1 set MaxJobs=15
 
+go to slurm.conf
+-PartitionName=nova Nodes=ALL Default=YES MaxTime=25-00:00:00 DefaultTime=30:00:00
+restart
+sinfo (if state unk)
+-scontrol reconfigure
+-srun -n 1 -A quantum-acc --time=01:00 --pty /bin/bash
+output
+-squeue
+-sinfo
 ---
 FOUR(qos)
 -slurm.conf (add)
