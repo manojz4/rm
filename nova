@@ -5,6 +5,9 @@ Do systemctl to all nodes
 
 *for idling the node
 scontrol update nodename=compute-2 state=idle
+
+*for downing the node
+scontrol update nodename=compute-1 state=down reason="maintenance"
 --
 ONE(nova)
 create user(on all nodes)
